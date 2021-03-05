@@ -1,15 +1,11 @@
-import logo from './images/Vector.svg';
-import avatar from './images/image.jpg';
+import avatar from '../images/image.jpg';
+import Header from '../components/Header.js';
 
 function App() {
   return (
   <div className="body">
     <div className="page">
-      <header className="header page__header">
-        <a className="header__link" target="_blank" href="#">
-          <img className="header__logo" src={logo} alt="логотип Место Россия"/>
-        </a>
-      </header>
+      <Header />
 
       <main className="content">
         <section className="profile">
@@ -48,7 +44,7 @@ function App() {
         <p className="footer__copy">&copy; 2020 Mesto Russia</p>
       </footer>
     </div>
-    
+
     <div className="popup popup_edd">
       <div className="popup__container">
         <button className="popup__close-icon" type="button" aria-label="close"></button>
