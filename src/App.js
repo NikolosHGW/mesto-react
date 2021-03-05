@@ -1,24 +1,124 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from './images/Vector.svg';
+import avatar from './images/image.jpg';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+  <div className="body">
+    <div className="page">
+      <header className="header page__header">
+        <a className="header__link" target="_blank" href="#">
+          <img className="header__logo" src={logo} alt="логотип Место Россия"/>
         </a>
       </header>
+
+      <main className="content">
+        <section className="profile">
+          <div className="profile__container">
+            <div className="profile__avatar-cover">
+              <img className="profile__avatar" src={avatar} alt="Аватар"/>
+              <button className="profile__avatar-button" type="button" aria-label="edit"></button>
+            </div>
+            <div className="profile__info">
+              <h1 className="profile__name">Жак-Ив Кусто</h1>
+              <p className="profile__job">Исследователь океана</p>
+              <button className="profile__edit-button" type="button" aria-label="edit"></button>
+            </div>
+          </div>
+          <button className="profile__add-button" type="button" aria-label="add"></button>
+        </section>
+
+        <section className="elements content__elements">
+          <template className="elements__template" id="element-template">
+            <article className="element">
+              <button className="element__img-button" type="button"><img className="element__img" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="загруженная картинка"/></button>
+              <button className="element__del-button" type="button" aria-label="delet"></button>
+              <div className="element__info">
+                <h2 className="element__heading"></h2>
+                <div className="element__group">
+                  <button className="element__like-button" type="button" aria-label="like"></button>
+                  <p className="element__count">0</p>
+                </div>
+              </div>
+            </article>
+          </template>
+        </section>
+
+      </main>
+      <footer className="footer">
+        <p className="footer__copy">&copy; 2020 Mesto Russia</p>
+      </footer>
     </div>
+    
+    <div className="popup popup_edd">
+      <div className="popup__container">
+        <button className="popup__close-icon" type="button" aria-label="close"></button>
+        <h2 className="popup__heading">Редактировать профиль</h2>
+        <form className="popup__form" name="popupForm" noValidate>
+          <fieldset className="popup__input-text">
+            <label className="popup__field">
+              <input id="name-input" className="popup__input popup__input_el_name" type="text" name="name" required minLength="2" maxLength="40"/>
+              <span className="popup__input-error name-input-error"></span>
+            </label>
+            <label className="popup__field">
+              <input id="job-input" className="popup__input popup__input_el_job" type="text" name="job" required minLength="2" maxLength="200"/>
+              <span className="popup__input-error job-input-error"></span>
+            </label>
+          </fieldset>
+          <button className="popup__save-button" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <div className="popup popup_add">
+      <div className="popup__container">
+        <button className="popup__close-icon" type="button" aria-label="close"></button>
+        <h2 className="popup__heading">Новое место</h2>
+        <form className="popup__form" name="popupAddForm" noValidate>
+          <fieldset className="popup__input-text">
+            <label className="popup__field">
+              <input id="card-name-input" className="popup__input popup__input_el_card-name" placeholder="Название" type="text" name="name" required minLength="2" maxLength="30"/>
+              <span className="popup__input-error card-name-input-error"></span>
+            </label>
+            <label className="popup__field">
+              <input id="img-link-input" className="popup__input popup__input_el_img-link" placeholder="Ссылка на картинку" type="url" name="link" required/>
+              <span className="popup__input-error img-link-input-error"></span>
+            </label>
+          </fieldset>
+          <button className="popup__save-button" type="submit">Создать</button>
+        </form>
+      </div>
+    </div>
+    <div className="popup popup_img">
+      <div className="popup-img">
+        <img className="popup-img__img" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Загруженная картинка в большем разрешении"/>
+        <p className="popup-img__caption"></p>
+        <button className="popup__close-icon" type="button" aria-label="close"></button>
+      </div>
+    </div>
+    <div className="popup popup_del">
+      <div className="popup__container">
+        <button className="popup__close-icon" type="button" aria-label="close"></button>
+        <h2 className="popup__heading">Вы уверены?</h2>
+        <form className="popup__form popup__form_del" name="popupDelForm" noValidate>
+          <button className="popup__save-button popup__save-button_del" type="submit">Да</button>
+        </form>
+      </div>
+    </div>
+    <div className="popup popup_refresh">
+      <div className="popup__container">
+        <button className="popup__close-icon" type="button" aria-label="close"></button>
+        <h2 className="popup__heading">Обновить аватар</h2>
+        <form className="popup__form" name="popupRefreshForm" noValidate>
+          <fieldset className="popup__input-text">
+            <label className="popup__field">
+              <input id="avatar-link-input" className="popup__input popup__input_el_avatar-link" placeholder="Ссылка на картинку" type="url" name="link" required/>
+              <span className="popup__input-error avatar-link-input-error"></span>
+            </label>
+          </fieldset>
+          <button className="popup__save-button" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+  </div>
   );
 }
 
