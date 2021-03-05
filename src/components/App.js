@@ -1,6 +1,7 @@
 import Header from '../components/Header.js';
 import Main from '../components/Main.js';
 import Footer from '../components/Footer.js';
+import ImagePopup from '../components/ImagePopup.js';
 
 function App() {
   return (
@@ -49,13 +50,7 @@ function App() {
         </form>
       </div>
     </div>
-    <div className="popup popup_img">
-      <div className="popup-img">
-        <img className="popup-img__img" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Загруженная картинка в большем разрешении"/>
-        <p className="popup-img__caption"></p>
-        <button className="popup__close-icon" type="button" aria-label="close"></button>
-      </div>
-    </div>
+    <ImagePopup />
     <div className="popup popup_del">
       <div className="popup__container">
         <button className="popup__close-icon" type="button" aria-label="close"></button>

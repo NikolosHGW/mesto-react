@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Footer(props) {
+export default function PopupWithForm(props) {
   return (
     <div className="popup popup_del" className={`popup popup_${props.name}`}>
       <div className="popup__container">
