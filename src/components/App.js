@@ -1,5 +1,6 @@
 import Header from '../components/Header.js';
 import Main from '../components/Main.js';
+import Footer from '../components/Footer.js';
 
 function App() {
   return (
@@ -7,9 +8,7 @@ function App() {
     <div className="page">
       <Header />
       <Main />
-      <footer className="footer">
-        <p className="footer__copy">&copy; 2020 Mesto Russia</p>
-      </footer>
+      <Footer />
     </div>
 
     <div className="popup popup_edd">
