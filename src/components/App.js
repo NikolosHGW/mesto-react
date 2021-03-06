@@ -3,8 +3,28 @@ import Main from '../components/Main.js';
 import Footer from '../components/Footer.js';
 import ImagePopup from '../components/ImagePopup.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import React from 'react';
 
 function App() {
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+
+  function handleEditProfileClick() {
+    setIsEditProfilePopupOpen(true);
+  }
+  function handleAddPlaceClick() {
+    setIsAddPlacePopupOpen(true);
+  }
+  function handleEditAvatarClick() {
+    setIsEditAvatarPopupOpen(true);
+  }
+  function closeAllPopups() {
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+  }
+
   return (
   <div className="body">
     <div className="page">
@@ -13,8 +33,9 @@ function App() {
       <Footer />
     </div>
 
-    <PopupWithForm name="edd"
-    title="Редактировать профиль" textButton="Сохранить">
+    <PopupWithForm name="edd" title="Редактировать профиль"
+     textButton="Сохранить" isOpen={isEditProfilePopupOpen}
+     onClose={closeAllPopups}>
       <fieldset className="popup__input-text">
         <label className="popup__field">
           <input id="name-input" className="popup__input popup__input_el_name" type="text" name="name" required minLength="2" maxLength="40"/>
@@ -27,8 +48,9 @@ function App() {
       </fieldset>
     </PopupWithForm>
 
-    <PopupWithForm name="add"
-    title="Новое место" textButton="Создать">
+    <PopupWithForm name="add" title="Новое место"
+     textButton="Создать" isOpen={isAddPlacePopupOpen}
+     onClose={closeAllPopups}>
       <fieldset className="popup__input-text">
         <label className="popup__field">
           <input id="card-name-input" className="popup__input popup__input_el_card-name" placeholder="Название" type="text" name="name" required minLength="2" maxLength="30"/>
@@ -45,8 +67,9 @@ function App() {
 
     <PopupWithForm name="del" title="Вы уверены?" textButton="Да" />
 
-    <PopupWithForm name="refresh"
-    title="Обновить аватар" textButton="Сохранить">
+    <PopupWithForm name="refresh" title="Обновить аватар"
+     textButton="Сохранить" isOpen={isEditAvatarPopupOpen}
+     onClose={closeAllPopups}>
       <fieldset className="popup__input-text">
         <label className="popup__field">
           <input id="avatar-link-input" className="popup__input popup__input_el_avatar-link" placeholder="Ссылка на картинку" type="url" name="link" required/>
@@ -57,21 +80,6 @@ function App() {
 
   </div>
   );
-}
-
-function handleEditAvatarClick() {
-  const popupAvatar = document.querySelector('.popup_refresh');
-  popupAvatar.classList.add('popup_opened');
-}
-
-function handleEditProfileClick() {
-  const popupEdit = document.querySelector('.popup_edd');
-  popupEdit.classList.add('popup_opened');
-}
-
-function handleAddPlaceClick() {
-  const popupAdd = document.querySelector('.popup_add');
-  popupAdd.classList.add('popup_opened');
 }
 
 export default App;
