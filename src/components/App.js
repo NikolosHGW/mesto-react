@@ -26,7 +26,7 @@ function App() {
   }
 
   return (
-  <div className="body">
+  <>
     <div className="page">
       <Header />
       <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} />
@@ -78,7 +78,7 @@ function App() {
       </fieldset>
     </PopupWithForm>
 
-  </div>
+  </>
   );
 }
 

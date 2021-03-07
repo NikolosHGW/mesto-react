@@ -2,11 +2,8 @@ import React from "react";
 import { api } from '../utils/api.js';
 
 export default function Main(props) {
-  const [userInfo, setUserInfo] = React.useState({
-    userName: '',
-    userDescription: '',
-    userAvatar: '',
-  });
+  const [userInfo, setUserInfo] = React.useState({});
+  const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
     api.getInfoUser()
@@ -17,7 +14,15 @@ export default function Main(props) {
           userAvatar: data.avatar,
         })
       })
-  });
+      .catch(res => console.log(res));
+  }, []);
+  React.useEffect(() => {
+    api.getInitialCard()
+      .then(data => {
+        setCards(data);
+      })
+      .catch(res => console.log(res));
+  }, []);
 
   return (
   <main className="content">
@@ -37,19 +42,19 @@ export default function Main(props) {
     </section>
 
     <section className="elements content__elements">
-      <template className="elements__template" id="element-template">
-        <article className="element">
-          <button className="element__img-button" type="button"><img className="element__img" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="загруженная картинка"/></button>
+      {cards.map((card) => (
+        <article key={card._id} className="element">
+          <button className="element__img-button" type="button"><img className="element__img" src={card.link} alt="загруженная картинка"/></button>
           <button className="element__del-button" type="button" aria-label="delet"></button>
           <div className="element__info">
-            <h2 className="element__heading"></h2>
+            <h2 className="element__heading">{card.name}</h2>
             <div className="element__group">
               <button className="element__like-button" type="button" aria-label="like"></button>
-              <p className="element__count">0</p>
+              <p className="element__count">{card.likes.length}</p>
             </div>
           </div>
         </article>
-      </template>
+      ))}
     </section>
   </main>
   );
