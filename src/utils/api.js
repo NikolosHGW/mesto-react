@@ -1,4 +1,4 @@
-import options from './utils.js';
+import { options } from './utils.js';
 
 export default class Api {
   constructor(options) {
