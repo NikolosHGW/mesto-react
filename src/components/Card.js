@@ -1,9 +1,13 @@
 import React from "react";
 
 export default function Card(props) {
+  function handleClick() {
+    props.onCardClick(props.card);
+  }
+
   return (
     <article className="element">
-      <button className="element__img-button" type="button"><img className="element__img" src={props.card.link} alt="загруженная картинка"/></button>
+      <button className="element__img-button" type="button" onClick={handleClick}><img className="element__img" src={props.card.link} alt="загруженная картинка"/></button>
       <button className="element__del-button" type="button" aria-label="delet"></button>
       <div className="element__info">
         <h2 className="element__heading">{props.card.name}</h2>
