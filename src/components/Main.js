@@ -1,4 +1,5 @@
 import React from "react";
+import Card from './Card.js';
 import { api } from '../utils/api.js';
 
 export default function Main(props) {
@@ -43,17 +44,7 @@ export default function Main(props) {
 
     <section className="elements content__elements">
       {cards.map((card) => (
-        <article key={card._id} className="element">
-          <button className="element__img-button" type="button"><img className="element__img" src={card.link} alt="загруженная картинка"/></button>
-          <button className="element__del-button" type="button" aria-label="delet"></button>
-          <div className="element__info">
-            <h2 className="element__heading">{card.name}</h2>
-            <div className="element__group">
-              <button className="element__like-button" type="button" aria-label="like"></button>
-              <p className="element__count">{card.likes.length}</p>
-            </div>
-          </div>
-        </article>
+        <Card key={card._id} card={card} />
       ))}
     </section>
   </main>
