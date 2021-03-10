@@ -7,8 +7,10 @@ export default function Card(props) {
 
   return (
     <article className="element">
-      <button className="element__img-button" type="button" onClick={handleClick}><img className="element__img" src={props.card.link} alt="загруженная картинка"/></button>
-      <button className="element__del-button" type="button" aria-label="delet"></button>
+      <button className="element__img-button" type="button" onClick={handleClick}>
+        <img className="element__img" src={props.card.link} alt={`загруженная картинка: ${props.card.name}`}/>
+      </button>
+      <button className="element__del-button" type="button" aria-label="delete"></button>
       <div className="element__info">
         <h2 className="element__heading">{props.card.name}</h2>
         <div className="element__group">
