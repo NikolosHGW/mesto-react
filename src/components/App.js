@@ -4,6 +4,7 @@ import Footer from './Footer';
 import ImagePopup from './ImagePopup';
 import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 import { api } from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import React from 'react';
@@ -54,9 +55,20 @@ function App() {
           'name': res.name,
           'about': res.about
         });
+        closeAllPopups();
       })
       .catch(res => console.log(res));
-    closeAllPopups();
+  }
+  function handleUpdateAvatar({ avatar }) {
+    api.changeAvatar(avatar)
+      .then(res => {
+        setCurrentUser({
+          ...currentUser,
+          'avatar': res.avatar,
+        });
+        closeAllPopups();
+      })
+      .catch(res => console.log(res));
   }
 
   return (
@@ -72,7 +84,11 @@ function App() {
       <Footer />
     </div>
 
-    <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
+    <EditProfilePopup
+      isOpen={isEditProfilePopupOpen}
+      onClose={closeAllPopups}
+      onUpdateUser={handleUpdateUser}
+    />
 
     <PopupWithForm name="add" title="Новое место"
      textButton="Создать" isOpen={isAddPlacePopupOpen}
@@ -93,16 +109,11 @@ function App() {
 
     <PopupWithForm name="del" title="Вы уверены?" textButton="Да" />
 
-    <PopupWithForm name="refresh" title="Обновить аватар"
-     textButton="Сохранить" isOpen={isEditAvatarPopupOpen}
-     onClose={closeAllPopups}>
-      <fieldset className="popup__input-text">
-        <label className="popup__field">
-          <input id="avatar-link-input" className="popup__input popup__input_el_avatar-link" placeholder="Ссылка на картинку" type="url" name="link" required/>
-          <span className="popup__input-error avatar-link-input-error"></span>
-        </label>
-      </fieldset>
-    </PopupWithForm>
+    <EditAvatarPopup
+      isOpen={isEditAvatarPopupOpen}
+      onClose={closeAllPopups}
+      onUpdateAvatar={handleUpdateAvatar}
+    />
 
   </CurrentUserContext.Provider>
   );
