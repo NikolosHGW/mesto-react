@@ -8,6 +8,23 @@ export default function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardCl
 
   const currentUser = React.useContext(CurrentUserContext);
 
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(user => user._id === currentUser._id);
+
+    api.changeLikeCardStatus(card._id, isLiked)
+      .then(newCard => {
+        setCards(prevState => prevState.map(c => c._id === card._id ? newCard : c));
+      })
+      .catch(res => console.log(res));
+  }
+  function handleCardDelete(card) {
+    api.deleteCard(card._id)
+      .then(() => {
+        setCards(prevState => prevState.filter(c => c._id !== card._id));
+      })
+      .catch(res => console.log(res));
+  }
+
   React.useEffect(() => {
     api.getInitialCard()
       .then(data => {
@@ -35,7 +52,13 @@ export default function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardCl
 
     <section className="elements content__elements">
       {cards.map((card) => (
-        <Card key={card._id} card={card} onCardClick={onCardClick} />
+        <Card
+          key={card._id}
+          card={card}
+          onCardClick={onCardClick}
+          onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
+        />
       ))}
     </section>
   </main>

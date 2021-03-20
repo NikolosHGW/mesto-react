@@ -20,7 +20,8 @@ function App() {
       setCurrentUser({
         name: data.name,
         about: data.about,
-        avatar: data.avatar
+        avatar: data.avatar,
+        _id: data._id
       });
     })
     .catch(res => console.log(res));

@@ -84,6 +84,15 @@ export default class Api {
     })
       .then(this._checkResponse);
   }
+
+  changeLikeCardStatus(id, isLiked) {
+    const currentMethod = isLiked ? 'DELETE' : 'PUT';
+    return fetch(`${this.options.baseUrl}/cards/likes/${id}`, {
+      method: currentMethod,
+      headers: this.options.headers
+    })
+      .then(this._checkResponse);
+  }
 }
 
 export const api = new Api(options);
