@@ -1,7 +1,7 @@
 import React from "react";
 import logo from '../images/Vector.svg';
 
-export default function Header() {
+export default React.memo(() => {
   return (
     <header className="header page__header">
       <a className="header__link" target="_blank" href="#">
@@ -9,4 +9,4 @@ export default function Header() {
       </a>
     </header>
   );
-}
+});
