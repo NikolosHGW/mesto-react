@@ -14,6 +14,7 @@ export default function ConfirmDeletePopup({ isOpen, onClose, onConfirmCardDelet
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      isValid={true}
     />
   );
 }

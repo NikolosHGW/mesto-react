@@ -20,6 +20,7 @@ export default function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      isValid={true}
     >
       <fieldset className="popup__input-text">
         <label className="popup__field">
