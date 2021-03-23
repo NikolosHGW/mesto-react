@@ -3,14 +3,23 @@ import PopupWithForm from './PopupWithForm';
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
-  const [info, setInfo] = React.useState({name: '', description: ''});
+  const [info, setInfo] = React.useState({
+    name: '',
+    description: '',
+    nameValid: true,
+    descriptionValid: true,
+    nameValidMessage: '',
+    descriptionValidMessage: '',
+  });
 
   const currentUser = React.useContext(CurrentUserContext);
 
   function handleInfoChange(evt) {
     setInfo({
       ...info,
-      [evt.target.name]: evt.target.value
+      [evt.target.name]: evt.target.value,
+      [`${evt.target.name}Valid`]: evt.target.validity.valid,
+      [`${evt.target.name}ValidMessage`]: evt.target.validationMessage,
     });
   }
   function handleSubmit(evt) {
@@ -23,7 +32,11 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
 
   React.useEffect(() => {
     setInfo(prev => currentUser.name && currentUser.about
-      ? {name: currentUser.name, description: currentUser.about} : prev);
+      ? {
+        ...prev,
+        name: currentUser.name,
+        description: currentUser.about
+      } : prev);
   }, [currentUser]);
 
   return (
@@ -34,12 +47,14 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      isValid={info.nameValid && info.descriptionValid}
     >
       <fieldset className="popup__input-text">
         <label className="popup__field">
           <input
             id="name-input"
-            className="popup__input popup__input_el_name"
+            className={`popup__input popup__input_el_name${
+              info.nameValidMessage ? ' popup__input_type_error' : ''}`}
             value={info.name}
             onChange={handleInfoChange}
             type="text"
@@ -48,12 +63,17 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
             minLength="2"
             maxLength="40"
           />
-          <span className="popup__input-error name-input-error"></span>
+          <span className={`popup__input-error name-input-error${
+            info.nameValid ? '' : ' popup__input-error_active'}`}
+          >
+            {info.nameValid ? '' : info.nameValidMessage}
+          </span>
         </label>
         <label className="popup__field">
           <input
             id="job-input"
-            className="popup__input popup__input_el_job"
+            className={`popup__input popup__input_el_job${
+              info.descriptionValidMessage ? ' popup__input_type_error' : ''}`}
             value={info.description}
             onChange={handleInfoChange}
             type="text"
@@ -62,7 +82,11 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
             minLength="2"
             maxLength="200"
           />
-          <span className="popup__input-error job-input-error"></span>
+          <span className={`popup__input-error job-input-error${
+            info.descriptionValid ? '' : ' popup__input-error_active'}`}
+          >
+            {info.descriptionValid ? '' : info.descriptionValidMessage}
+          </span>
         </label>
       </fieldset>
     </PopupWithForm>
