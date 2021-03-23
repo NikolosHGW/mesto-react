@@ -3,28 +3,27 @@ import PopupWithForm from './PopupWithForm';
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
-  const [name, setName] = React.useState('');
-  const [description, setDescription] = React.useState('');
+  const [info, setInfo] = React.useState({name: '', description: ''});
 
   const currentUser = React.useContext(CurrentUserContext);
 
-  function handleChangeName(evt) {
-    setName(evt.target.value);
-  }
-  function handleChangeDescription(evt) {
-    setDescription(evt.target.value);
+  function handleInfoChange(evt) {
+    setInfo({
+      ...info,
+      [evt.target.name]: evt.target.value
+    });
   }
   function handleSubmit(evt) {
     evt.preventDefault();
     onUpdateUser({
-      name,
-      about: description
+      name: info.name,
+      about: info.description
     });
   }
 
   React.useEffect(() => {
-    setName(prev => currentUser.name ? currentUser.name : prev);
-    setDescription(prev => currentUser.about ? currentUser.about : prev);
+    setInfo(prev => currentUser.name && currentUser.about
+      ? {name: currentUser.name, description: currentUser.about} : prev);
   }, [currentUser]);
 
   return (
@@ -41,8 +40,8 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
           <input
             id="name-input"
             className="popup__input popup__input_el_name"
-            value={name}
-            onChange={handleChangeName}
+            value={info.name}
+            onChange={handleInfoChange}
             type="text"
             name="name"
             required
@@ -55,10 +54,10 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
           <input
             id="job-input"
             className="popup__input popup__input_el_job"
-            value={description}
-            onChange={handleChangeDescription}
+            value={info.description}
+            onChange={handleInfoChange}
             type="text"
-            name="job"
+            name="description"
             required
             minLength="2"
             maxLength="200"
