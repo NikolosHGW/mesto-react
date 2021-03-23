@@ -2,19 +2,21 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import ImagePopup from './ImagePopup';
-import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
+import ConfirmDeletePopup from './ConfirmDeletePopup';
 import { api } from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import React from 'react';
-import AddPlacePopup from './AddPlacePopup';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(false);
+  const [selectedCardForDelete, setSelectedCardForDelete] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
 
@@ -51,14 +53,18 @@ function App() {
       .catch(res => console.log(res));
   }
   function handleCardDelete(card) {
+    setIsConfirmDeletePopupOpen(true);
+    setSelectedCardForDelete(card);
+  }
+  function handleConfirmCardDelete(card) {
     api.deleteCard(card._id)
       .then(() => {
         setCards(prevState => prevState
           .filter(c => c._id !== card._id));
+        closeAllPopups();
       })
       .catch(res => console.log(res));
   }
-
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
   }
@@ -75,6 +81,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
+    setIsConfirmDeletePopupOpen(false);
     setSelectedCard(false);
   }
   function handleUpdateUser({ name, about }) {
@@ -139,7 +146,12 @@ function App() {
 
     <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
-    <PopupWithForm name="del" title="Вы уверены?" textButton="Да" />
+    <ConfirmDeletePopup
+      isOpen={isConfirmDeletePopupOpen}
+      onClose={closeAllPopups}
+      onConfirmCardDelete={handleConfirmCardDelete}
+      card={selectedCardForDelete}
+    />
 
     <EditAvatarPopup
       isOpen={isEditAvatarPopupOpen}
