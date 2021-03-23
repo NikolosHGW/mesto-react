@@ -1,6 +1,6 @@
 import React from "react";
 
-export default React.memo(({ card, onClose }) => {
+export default function ImagePopup({ card, onClose }) {
   return (
     <div className={`popup popup_img${card ? ' popup_opened' : ''}`}>
       <div className="popup-img">
@@ -10,5 +10,5 @@ export default React.memo(({ card, onClose }) => {
       </div>
     </div>
   );
-});
+}
 
