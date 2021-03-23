@@ -5,6 +5,16 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 export default function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onCardLike, onCardDelete }) {
   const currentUser = React.useContext(CurrentUserContext);
 
+  const cardList = React.useMemo(() => cards.map(card => (
+    <Card
+      key={card._id}
+      card={card}
+      onCardClick={onCardClick}
+      onCardLike={onCardLike}
+      onCardDelete={onCardDelete}
+    />
+  )), [cards]);
+
   return (
   <main className="content">
     <section className="profile">
@@ -23,15 +33,7 @@ export default function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardCl
     </section>
 
     <section className="elements content__elements">
-      {cards.map((card) => (
-        <Card
-          key={card._id}
-          card={card}
-          onCardClick={onCardClick}
-          onCardLike={onCardLike}
-          onCardDelete={onCardDelete}
-        />
-      ))}
+      {cardList}
     </section>
   </main>
   );
