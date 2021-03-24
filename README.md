@@ -1,8 +1,8 @@
 # Mesto with React
 
-This project is reconstruction [mesto](https://github.com/NikolosHGW/mesto), which was build on Vanilla JS.
-In this project i practice with React. (Project under construction)
-Here you can see my website [mesto-react](https://nikoloshgw.github.io/mesto-react/)
+This project is reconstruction [mesto](https://github.com/NikolosHGW/mesto), which was build on Vanilla JS.  
+In this project i practice with React. (Project under construction)  
+Here you can see my website [mesto-react](https://nikoloshgw.github.io/mesto-react/)  
 
 ## What need to do?
 
