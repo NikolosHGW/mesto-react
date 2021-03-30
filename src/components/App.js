@@ -9,6 +9,9 @@ import ConfirmDeletePopup from './ConfirmDeletePopup';
 import { api } from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import React from 'react';
+import { Route, Switch } from 'react-router';
+import Login from './Login';
+import Register from './Register';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -120,15 +123,25 @@ function App() {
   <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
       <Header />
-      <Main
-        onEditProfile={handleEditProfileClick}
-        onAddPlace={handleAddPlaceClick}
-        onEditAvatar={handleEditAvatarClick}
-        onCardClick={handleCardClick}
-        cards={cards}
-        onCardLike={handleCardLike}
-        onCardDelete={handleCardDelete}
-      />
+      <Switch>
+        <Route exact path="/">
+          <Main
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onEditAvatar={handleEditAvatarClick}
+            onCardClick={handleCardClick}
+            cards={cards}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
+          />
+        </Route>
+        <Route path="/sign-in">
+          <Login />
+        </Route>
+        <Route path="/sign-up">
+          <Register />
+        </Route>
+      </Switch>
       <Footer />
     </div>
 
