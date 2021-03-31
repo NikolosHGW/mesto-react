@@ -1,4 +1,4 @@
-export default function AuthForm({ title, name, textButton }) {
+export default function AuthForm({ title, name, textButton, children }) {
   return (
     <div className="auth">
       <h2 className="auth__heading">{title}</h2>
@@ -65,6 +65,7 @@ export default function AuthForm({ title, name, textButton }) {
           {textButton}
         </button>
       </form>
+      {children}
     </div>
   );
 }

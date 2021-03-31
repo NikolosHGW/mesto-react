@@ -7,8 +7,9 @@ export default function Register() {
         title="Регистрация"
         name="register"
         textButton="Зарегистрироваться"
-      />
-      <span className="">Уже зарегистрированы? Войти</span>
+      >
+        <span className="auth__span">Уже зарегистрированы? Войти</span>
+      </AuthForm>
     </>
   );
 }
