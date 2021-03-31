@@ -1,7 +1,14 @@
+import AuthForm from "./AuthForm";
+
 export default function Register() {
   return (
-    <div style={{
-      color: 'red'
-    }}>Тут будет регистрация</div>
+    <>
+      <AuthForm
+        title="Регистрация"
+        name="register"
+        textButton="Зарегистрироваться"
+      />
+      <span className="">Уже зарегистрированы? Войти</span>
+    </>
   );
 }
