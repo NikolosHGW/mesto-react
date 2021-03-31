@@ -1,7 +1,11 @@
+import AuthForm from "./AuthForm";
+
 export default function Login() {
   return (
-    <div style={{
-      color: 'red'
-    }}>Привет, Дривэ!</div>
+    <AuthForm
+      title="Вход"
+      name="login"
+      textButton="Войти"
+    />
   );
 }
