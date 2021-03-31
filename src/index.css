@@ -53,3 +53,10 @@
 @import url("./blocks/popup/_img/popup_img.css");
 @import url("./blocks/popup-img/__img/popup-img__img.css");
 @import url("./blocks/popup-img/__caption/popup-img__caption.css");
+@import url("./blocks/auth/auth.css");
+@import url("./blocks/auth/__heading/auth__heading.css");
+@import url("./blocks/auth/__form/auth__form.css");
+@import url("./blocks/auth/__input-text/auth__input-text.css");
+@import url("./blocks/auth/__field/auth__field.css");
+@import url("./blocks/auth/__input/auth__input.css");
+@import url("./blocks/auth/__save-button/auth__save-button.css");

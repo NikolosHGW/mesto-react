@@ -15,6 +15,7 @@ export default function AuthForm({ title, name, textButton }) {
               // className={`auth__input auth__input_el_email${
               //   info.nameValidMessage ? ' popup__input_type_error' : ''}`}
               className="auth__input"
+              placeholder="Email"
               // value={info.name}
               // onChange={handleInfoChange}
               type="email"
@@ -35,6 +36,7 @@ export default function AuthForm({ title, name, textButton }) {
               // className={`auth__input auth__input_el_job${
               //   info.descriptionValidMessage ? ' auth__input_type_error' : ''}`}
               className="auth__input"
+              placeholder="Пароль"
               // value={info.description}
               // onChange={handleInfoChange}
               type="password"
