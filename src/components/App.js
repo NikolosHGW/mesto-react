@@ -12,6 +12,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router';
 import Login from './Login';
 import Register from './Register';
+import InfoTooltip from './InfoTooltip';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -171,6 +172,8 @@ function App() {
       onClose={closeAllPopups}
       onUpdateAvatar={handleUpdateAvatar}
     />
+
+    <InfoTooltip />
 
   </CurrentUserContext.Provider>
   );

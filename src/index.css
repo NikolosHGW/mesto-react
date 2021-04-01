@@ -61,3 +61,9 @@
 @import url("./blocks/auth/__input/auth__input.css");
 @import url("./blocks/auth/__save-button/auth__save-button.css");
 @import url("./blocks/auth/__span/auth__span.css");
+@import url("./blocks/info-tool/info-tool.css");
+@import url("./blocks/info-tool/__close-icon/info-tool__close-icon.css");
+@import url("./blocks/info-tool/__container/info-tool__container.css");
+@import url("./blocks/info-tool/__img/info-tool__img.css");
+@import url("./blocks/info-tool/__text/info-tool__text.css");
+@import url("./blocks/info-tool/_opened/info-tool_opened.css");
