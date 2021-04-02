@@ -9,10 +9,11 @@ import ConfirmDeletePopup from './ConfirmDeletePopup';
 import { api } from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import React from 'react';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, useHistory } from 'react-router';
 import Login from './Login';
 import Register from './Register';
 import ProtectedRoute from './ProtectedRoute';
+import { checkToken } from '../utils/auth';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -24,6 +25,7 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const history = useHistory();
 
   React.useEffect(() => {
     api.getInfoUser()
@@ -45,6 +47,19 @@ function App() {
       })
       .catch(res => console.log(res));
   }, []);
+
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+    if(token) {
+      checkToken(token)
+        .then(data => {
+          console.log(data);
+          setLoggedIn(true);
+          history.push('/');
+        })
+        .catch(res => console.log(res));
+    }
+  }, [history]);
 
   function handleCardLike(card) {
     const isLiked = card.likes

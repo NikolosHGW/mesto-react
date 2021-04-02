@@ -14,6 +14,7 @@ export default React.memo(({ onLogin }) => {
     authorize(email, password)
       .then(res => {
         if(res.token) {
+          localStorage.setItem('token', res.token);
           onLogin();
           history.push('/');
         }
