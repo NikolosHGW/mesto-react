@@ -121,6 +121,8 @@ function App() {
       .catch(res => console.log(res))
   }
 
+  const handleLogin = React.useCallback(() => setLoggedIn(true), []);
+
   return (
   <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
@@ -139,7 +141,7 @@ function App() {
           onCardDelete={handleCardDelete}
         />
         <Route path="/sign-in">
-          <Login />
+          <Login onLogin={handleLogin} />
         </Route>
         <Route path="/sign-up">
           <Register />

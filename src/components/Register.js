@@ -1,5 +1,5 @@
 import React from "react";
-import register from "../utils/auth";
+import { register } from "../utils/auth";
 import AuthForm from "./AuthForm";
 import InfoTooltip from "./InfoTooltip";
 
@@ -12,7 +12,7 @@ export default React.memo(() => {
   const { isOpen, isSuccess } = infoToolOpen;
 
   const handleClose = React.useCallback(() => {
-    setInfoToolOpen({isOpen: false, isSuccess: true});
+    setInfoToolOpen(prev => ({...prev, isOpen: false}));
   }, []);
 
   function handleSubmit(email, password) {

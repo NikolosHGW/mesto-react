@@ -1,7 +1,7 @@
 const BASE_URL = 'https://auth.nomoreparties.co';
 
-export default function register(email, password) {
-  return fetch(`${BASE_URL}/signup`, {
+function getPromise(email, password, endPoint) {
+  return fetch(`${BASE_URL}${endPoint}`, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json"
@@ -14,9 +14,16 @@ export default function register(email, password) {
     .then(res => {
       console.log(res.status);
       if(res.ok) {
-        console.log(res.ok);
         return res.json();
       }
-      return Promise.reject(`Ошибка: ${res.status}. ${res.statusText}.`);
+      return Promise.reject(`Ошибка. Status: ${res.status}; Status text: ${res.statusText}`);
     });
+}
+
+export function register(email, password) {
+  return getPromise(email, password, '/signup');
+}
+
+export function authorize(email, password) {
+  return getPromise(email, password, '/signin');
 }
