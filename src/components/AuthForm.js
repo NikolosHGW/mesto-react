@@ -1,11 +1,33 @@
-export default function AuthForm({ title, name, textButton, children }) {
+import React from "react";
+
+export default function AuthForm({ title, name, textButton, onSubmit, children }) {
+  const [userData, setUserData] = React.useState({
+    email: '',
+    password: ''
+  });
+
+  function handleChange(evt) {
+    const { name, value } = evt.target
+    setUserData({
+      ...userData,
+      [name]: value
+    });
+  }
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    const { email, password } = userData;
+    onSubmit(email, password);
+    setUserData({email: '', password: ''});
+  }
+
   return (
     <div className="auth">
       <h2 className="auth__heading">{title}</h2>
       <form
         className="auth__form"
         name={name}
-        // onSubmit={evt => {onSubmit(evt); setIsLoading(true)}}
+        onSubmit={handleSubmit}
         noValidate
       >
         <fieldset className="auth__input-text">
@@ -16,8 +38,8 @@ export default function AuthForm({ title, name, textButton, children }) {
               //   info.nameValidMessage ? ' popup__input_type_error' : ''}`}
               className="auth__input"
               placeholder="Email"
-              // value={info.name}
-              // onChange={handleInfoChange}
+              value={userData.email}
+              onChange={handleChange}
               type="email"
               name="email"
               required
@@ -37,8 +59,8 @@ export default function AuthForm({ title, name, textButton, children }) {
               //   info.descriptionValidMessage ? ' auth__input_type_error' : ''}`}
               className="auth__input"
               placeholder="Пароль"
-              // value={info.description}
-              // onChange={handleInfoChange}
+              value={userData.password}
+              onChange={handleChange}
               type="password"
               name="password"
               required
