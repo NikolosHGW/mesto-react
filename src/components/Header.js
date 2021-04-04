@@ -4,7 +4,6 @@ import logo from '../images/Vector.svg';
 import LogHeader from "./LogHeader";
 
 export default React.memo(({ email }) => {
-  console.log('Я здесь из Headr! Я должен вызываться не смотря на memo!');
   const [isOpen, setIsOpen] = React.useState(false);
 
   const handleLoggOut = React.useCallback(() => {
