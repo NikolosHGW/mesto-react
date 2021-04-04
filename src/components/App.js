@@ -24,7 +24,7 @@ function App() {
   const [selectedCardForDelete, setSelectedCardForDelete] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState({isLoggedIn: false, loggedEmail: ''});
   const history = useHistory();
 
   React.useEffect(() => {
@@ -54,12 +54,12 @@ function App() {
       checkToken(token)
         .then(data => {
           console.log(data);
-          setLoggedIn(true);
+          setLoggedIn({isLoggedIn: true, loggedEmail: data.data.email});
           history.push('/');
         })
         .catch(res => console.log(res));
     }
-  }, [history]);
+  }, [history, localStorage.getItem('token')]);
 
   function handleCardLike(card) {
     const isLiked = card.likes
@@ -136,16 +136,16 @@ function App() {
       .catch(res => console.log(res))
   }
 
-  const handleLogin = React.useCallback(() => setLoggedIn(true), []);
+  const handleLogin = React.useCallback(() => setLoggedIn(prev => ({...prev, isLoggedIn: true})), []);
 
   return (
   <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
-      <Header />
+      <Header email={loggedIn.loggedEmail} />
       <Switch>
         <ProtectedRoute
           exact path="/"
-          loggedIn={loggedIn}
+          loggedIn={loggedIn.isLoggedIn}
           component={Main}
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}

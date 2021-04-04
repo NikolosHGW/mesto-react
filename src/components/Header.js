@@ -1,28 +1,36 @@
 import React from "react";
 import { Route } from "react-router";
-import { Link } from "react-router-dom";
 import logo from '../images/Vector.svg';
+import LogHeader from "./LogHeader";
 
-export default React.memo(() => {
+export default React.memo(({ email }) => {
+  console.log('Я здесь из Headr! Я должен вызываться не смотря на memo!');
   const [isOpen, setIsOpen] = React.useState(false);
+
+  const handleLoggOut = React.useCallback(() => {
+    localStorage.removeItem('token');
+    setIsOpen(false);
+  }, []);
 
   return (
     <header className="header">
       {isOpen && (
-        <div className="header__login header__login_opened">
-          <p className="header__email">Тут будет емыло</p>
-          <Link className="header__nav-link" to="/sign-in">Выйти</Link>
-        </div>
+        <LogHeader
+          openedSelector=" header__login_opened"
+          email={email}
+          onLoggOut={handleLoggOut}
+        />
       )}
       <div className="header__container">
         <a className="header__link" target="_blank" href="#">
           <img className="header__logo" src={logo} alt="логотип Место Россия"/>
         </a>
         <Route exact path="/">
-          <div className="header__login">
-            <p className="header__email">Тут будет емыло</p>
-            <Link className="header__nav-link" to="/sign-in">Выйти</Link>
-          </div>
+          <LogHeader
+            openedSelector=""
+            email={email}
+            onLoggOut={handleLoggOut}
+          />
           {isOpen ? (
             <button
               className="header__menu-close-button"
