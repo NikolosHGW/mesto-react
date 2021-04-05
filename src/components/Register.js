@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { register } from "../utils/auth";
 import AuthForm from "./AuthForm";
 import InfoTooltip from "./InfoTooltip";
@@ -35,7 +36,12 @@ export default React.memo(() => {
         textButton="Зарегистрироваться"
         onSubmit={handleSubmit}
       >
-        <span className="auth__span">Уже зарегистрированы? Войти</span>
+        <span className="auth__span">
+          Уже зарегистрированы? <Link
+            className="auth__link"
+            to="/sign-in"
+          >Войти</Link>
+        </span>
       </AuthForm>
       <InfoTooltip
         isOpen={isOpen}

@@ -1,5 +1,6 @@
 import React from "react";
 import { Route } from "react-router";
+import { Link } from "react-router-dom";
 import logo from '../images/Vector.svg';
 import LogHeader from "./LogHeader";
 
@@ -47,6 +48,18 @@ export default React.memo(({ email }) => {
               <span className="header__menu-line"></span>
             </button>
           )}
+        </Route>
+        <Route path="/sign-in">
+          <Link
+            className="header__nav-link header__nav-link_color"
+            to="/sign-up"
+          >Регистрация</Link>
+        </Route>
+        <Route path="/sign-up">
+          <Link
+            className="header__nav-link header__nav-link_color"
+            to="/sign-in"
+          >Войти</Link>
         </Route>
       </div>
     </header>

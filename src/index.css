@@ -12,6 +12,7 @@
 @import url("./blocks/header/__login/_opened/header__login_opened.css");
 @import url("./blocks/header/__email/header__email.css");
 @import url("./blocks/header/__nav-link/header__nav-link.css");
+@import url("./blocks/header/__nav-link/_color/header__nav-link_color.css");
 @import url("./blocks/header/__menu-button/header__menu-button.css");
 @import url("./blocks/header/__menu-close-button/header__menu-close-button.css");
 @import url("./blocks/header/__menu-line/header__menu-line.css");
@@ -70,6 +71,7 @@
 @import url("./blocks/auth/__input/auth__input.css");
 @import url("./blocks/auth/__save-button/auth__save-button.css");
 @import url("./blocks/auth/__span/auth__span.css");
+@import url("./blocks/auth/__link/auth__link.css");
 @import url("./blocks/info-tool/info-tool.css");
 @import url("./blocks/info-tool/__close-icon/info-tool__close-icon.css");
 @import url("./blocks/info-tool/__container/info-tool__container.css");
